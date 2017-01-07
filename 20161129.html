@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <title>test</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content="
+
+0. はじめにtest
+
+Microsoft社がオープンソースで開発している高機能エディタVisual Studio Code。
+Visual Studioよりも軽く、他のエディタと比較してもプラグインが豊富、かつ、導入が便利であるため重宝しています。そしてSublime Textなどと同じで複数のプラットフォームで稼働させることができます。
+
+この記事では、HTML（JavaScript、CSSを含む）を編集するにあたり必要となる機能をセットアップする方法をまとめてようと..." name="description" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@Qiita" name="twitter:site" />
+    <meta content="84zume" name="twitter:creator" />
+    <meta content="Visual Studio CodeでHTML作成環境を整える - Qiita" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta content="http://qiita.com/84zume/items/476a29264fdc98d98201" property="og:url" />
+    <meta content="http://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png" property="og:image" />
+    <meta content="# 0. はじめに
+Microsoft社がオープンソースで開発している高機能エディタVisual Studio Code。
+Visual Studioよりも軽く、他のエディタと比較してもプラグインが豊富、かつ、導入が便利であるため重宝..." property="og:description" />
+    <meta content="Qiita" property="og:site_name" />
+    <meta content="564524038" property="fb:admins" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://cdn.qiita.com/assets/favicons/public/production-4ff10c1e1e2b5fcb353ff9cafdd56c70.ico" />
+    <link rel="apple-touch-icon" type="image/png" href="http://cdn.qiita.com/assets/favicons/public/apple-touch-icon-f9a6afad761ec2306e10db2736187c8b.png" />
+    <link href="/opensearch.xml" rel="search" title="Qiita" type="application/opensearchdescription+xml" />
+    <link rel="stylesheet" media="all" href="http://cdn.qiita.com/assets/public-0112ec5630b3dd92605052531a7904c9.min.css" />
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="tJwSDBhS9g5zalt6mWUxzcywtN/AW/eFg5vL8NXWqZSevWEKQaI9tRgBcM3ZCLBm2KL25fF4WfpmfBVquYAnsQ==" />
+</head>
+
+<body class="without-js" id=""><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-TBQWPN" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+    <script>
+        document.body.className = document.body.className.replace('without-js', '') + ' with-js';
+        window.Qiita = {
+            "asset_host": "cdn.qiita.com",
+            "TLD": "com",
+            "controller_path": "public/items",
+            "controller_action": "public/items#show",
+            "controller": "items",
+            "action": "show",
+            "env": "production",
+            "flash": {},
+            "is_landing_page": false,
+            "is_team_page": false,
+            "root_domain": "qiita.com",
+            "variant": null,
+            "config": {
+                "mixpanel": {
+                    "career": "dd35af27e959781713d63fd7ca898a8d",
+                    "per_team": "c0a2116368b33b44b5029ebd2cc9b094",
+                    "public": "be87616606b0e26a87689099aab2c4e5",
+                    "team": "b7c0342acba2dbc8742484d98788efb3"
+                },
+                "default_locale": "ja",
+                "locale": "en"
+            },
+            "team": null,
+            "user": null,
+            "GIT_BRANCH": null,
+            "DEBUG": false
+        };
+    </script>
+    <div class="headerContainer headerContainer-public" role="navigation">
+        <div data-react-class="T.HeaderContainer" data-react-props="{&quot;user&quot;:null,&quot;team&quot;:null,&quot;news&quot;:{&quot;type&quot;:&quot;募集&quot;,&quot;content&quot;:&quot;QiitaやQiita:Teamを良くしたいエンジニア&quot;,&quot;url&quot;:&quot;http://increments.co.jp/jobs/engineers?utm_source=qiita\u0026utm_medium=header_news&quot;},&quot;initial_unread_count&quot;:null,&quot;siteid_image&quot;:&quot;http://cdn.qiita.com/siteid-reverse.png&quot;,&quot;is_team_page&quot;:false,&quot;on_team_setting&quot;:false,&quot;show_post_menu&quot;:true,&quot;show_search_menu&quot;:true,&quot;is_fluid&quot;:false,&quot;locale&quot;:&quot;en&quot;}"></div>
+    </div>
+    <div id="main">
+        <ol class="itemBreadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Qiita</span></a>
+                <meta content="1" itemprop="position" />
+            </li>
+            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/items"><span itemprop="name">Items</span></a>
+                <meta content="2" itemprop="position" />
+            </li>
+            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/tags/VisualStudioCode"><span itemprop="name">VisualStudioCode</span></a>
+                <meta content="3" itemprop="position" />
+            </li>
+        </ol>
+        <article itemscope="" itemtype="http://schema.org/Article">
+            <div class="ArticleMainHeader ">
+                <div class="container"></div>
+                <div class="container">
+                    <div class="row s-flex-align-center">
+                        <div class="col-sm-9">
+                            <h1 class="ArticleMainHeader__title">Visual Studio CodeでHTML作成環境を整える</h1>
+                            <ul class="list-unstyled list-inline itemsShowHeaderTags">
+                                <li class="itemsShowHeaderTags_list">
+                                    <div class="tagIcon">
+                                        <a class="tagIcon_base" href="/tags/VisualStudioCode"><img alt="VisualStudioCode" class="tagIcon_img" src="https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/9ad92a7d146a0d848911dbb69c3cf7ee67d199c7/medium.jpg?1479363291" />
+                                            <div class="tagIcon_name">VisualStudioCode</div>
+                                            <div class="tagIcon_count">207</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="itemsShowHeaderTags_list">
+                                    <div class="tagIcon">
+                                        <a class="tagIcon_base" href="/tags/HTML"><img alt="HTML" class="tagIcon_img" src="https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/9068c4ec90f73848c4c0cfeb25eb082d20484587/medium.jpg?1465035225" />
+                                            <div class="tagIcon_name">HTML</div>
+                                            <div class="tagIcon_count">2050</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="itemsShowHeaderStock">
+                                <ul class="list-unstyled itemsShowHeaderStock_statusList">
+                                    <li>
+                                        <div class="itemsShowHeaderStock_count stock"><span class="fa fa-thumbs-up"></span><span class="js-likecount">25</span></div>
+                                        <div class="itemsShowHeaderStock_countText">Like</div>
+                                    </li>
+                                    <li>
+                                        <div class="itemsShowHeaderStock_count" content="0 UserComments" itemprop="interactionCount"><span class="fa fa-comment"></span>0</div>
+                                        <div class="itemsShowHeaderStock_countText">Comment</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="js-likebutton" data-props="{&quot;like_status&quot;:false,&quot;like_count&quot;:25,&quot;uuid&quot;:&quot;476a29264fdc98d98201&quot;,&quot;likable_type&quot;:&quot;Article&quot;}"></div>
+                            <ul class="list-inline ArticleMainHeader__users">
+                                <li class="js-hovercard" data-hovercard-target-name="kent_ocean">
+                                    <a itemprop="url" href="/kent_ocean"><img alt="kent_ocean" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/124995/profile-images/1473716080" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="gupuru">
+                                    <a itemprop="url" href="/gupuru"><img alt="gupuru" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/53996/profile-images/1478734677" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="myblue">
+                                    <a itemprop="url" href="/myblue"><img alt="myblue" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/95644/profile-images/1473706636" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="andna0410">
+                                    <a itemprop="url" href="/andna0410"><img alt="andna0410" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/140251/profile-images/1473721108" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="katopoi">
+                                    <a itemprop="url" href="/katopoi"><img alt="katopoi" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/87369/profile-images/1473704064" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="teremasune">
+                                    <a itemprop="url" href="/teremasune"><img alt="teremasune" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/118819/profile-images/1473714053" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="nmrmsys">
+                                    <a itemprop="url" href="/nmrmsys"><img alt="nmrmsys" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/76595/profile-images/1473700544" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="hyakuson">
+                                    <a itemprop="url" href="/hyakuson"><img alt="hyakuson" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/30304/profile-images/1473685474" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="hideji2">
+                                    <a itemprop="url" href="/hideji2"><img alt="hideji2" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/17814/profile-images/1473682265" /></a>
+                                </li>
+                                <li class="js-hovercard" data-hovercard-target-name="sako-j">
+                                    <a itemprop="url" href="/sako-j"><img alt="sako-j" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/45792/profile-images/1473690415" /></a>
+                                </li>
+                                <li><a href="/84zume/items/476a29264fdc98d98201/likers"><span class="fa fa-ellipsis-h"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ArticleAsideHeader">
+                <div class="container">
+                    <div class="u-flex u-space-between">
+                        <div class="u-flex u-flex-wrap">
+                            <div class="u-flex u-align-center s-pdv-5 u-flex-wrap">
+                                <div class="ArticleAsideHeader__author">
+                                    <a href="/84zume"><img class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/34410/profile-images/1473686365" alt="1473686365" /></a> <a class="u-link-unstyled" href="/84zume">84zume</a> </div>
+                                <div class="ArticleAsideHeader__date"><span data-toggle="tooltip" title="posted at 2016-09-13">Edited at <time datetime="2016-09-13T10:23:52+09:00" itemprop="dateModified">2016-09-13</time></span></div>
+                            </div>
+                            <div class="u-flex u-align-center s-pdv-5 mobile-hidden">
+                                <div class="ArticleAsideHeader__revision"> <a data-toggle="tooltip" title="Revisions" href="/84zume/items/476a29264fdc98d98201/revisions"><span class="fa fa-history"></span></a><span class="ArticleAsideHeader__revisionCount">5</span></div>
+                            </div>
+                            <div class="u-flex u-align-center s-pdv-5 mobile-hidden"></div>
+                        </div>
+                        <div class="u-flex u-align-center s-flex-justiry-between s-pdv-5 u-shrink-0">
+                            <div class="ArticleAsideHeader__stock">
+                                <div class="js-stockButton StockButton" data-counter="" data-path="/84zume/items/476a29264fdc98d98201" data-position="top" data-uuid="476a29264fdc98d98201">
+                                    <form class="button_to" method="post" action="/84zume/items/476a29264fdc98d98201/stock"><button class="StockButton__stock" type="submit"><div class="fa-stack fa-lg"><span class="fa fa-folder-open fa-stack-1x unstock"></span></div><span class="StockButton__label">Stock</span></button><input type="hidden"
+                                            name="authenticity_token" value="nTiu4ld32/NoX+Ajbxyz2tjrQIdvMfcMO5+XAybk1oC3Gd3kDocQSAM0y5QvcTJxzPkCvV4SWXPeeEmZSrJYpQ==" /></form>
+                                    <form class="button_to" method="post" action="/84zume/items/476a29264fdc98d98201/unstock"><button class="StockButton__unstock" data-toggle="tooltip" title="Stocked" type="submit"><div class="fa-stack fa-lg"><span class="fa fa-folder fa-stack-1x"></span><span class="fa fa-check fa-stack-1x fa-inverse"></span></div><span class="StockButton__label">Stock</span></button><input
+                                            type="hidden" name="authenticity_token" value="d0LYnS/SA+ZJyDDnR0RvqnY3kk/45pimoiD3ROMmx1NdY6ubdiLIXSKjG1AHKe4BYiXQdcnFNtlHxynej3BJdg==" /></form>
+                                </div>
+                            </div>
+                            <div class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-ellipsis-h fa-lg"></span></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li class="dropdown__item--mobile"><a href="/84zume/items/476a29264fdc98d98201/revisions"><span class="fa fa-fw fa-history"></span> Revisions<span>(5)</span></a></li>
+                                    <li><a data-target=".js-report-form" data-toggle="modal" href="#"><span class="fa fa-fw fa-flag"></span> Report article</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row" id="article-body-wrapper">
+                    <div class="col-sm-9">
+                        <section class="markdownContent markdownContent-headingEnabled js-task-list-container clearfix position-relative" id="item-476a29264fdc98d98201" itemprop="articleBody">
+                            <h1>
+                                <span id="0-はじめに" class="fragment"></span><a href="#0-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>0. はじめに</h1>
+
+                            <p>Microsoft社がオープンソースで開発している高機能エディタVisual Studio Code。<br> Visual Studioよりも軽く、他のエディタと比較してもプラグインが豊富、かつ、導入が便利であるため重宝しています。そしてSublime Textなどと同じで複数のプラットフォームで稼働させることができます。</p>
+
+                            <p>この記事では、HTML（JavaScript、CSSを含む）を編集するにあたり必要となる機能をセットアップする方法をまとめてようと思います。対象のVisual Studio Codeのバージョンは <strong>1.5</strong> です。</p>
+
+                            <h1>
+                                <span id="1-セットアップ" class="fragment"></span><a href="#1-%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97"><i class="fa fa-link"></i></a>1. セットアップ</h1>
+
+                            <p>用意する機能は大きく分けて次の3種類。<br> 1. エディタとしての基本機能を改善<br> 2. コードを書きやすくするプラグインの導入<br> 3. 作成したHTMLのプレビュータスクの作成</p>
+
+                            <h2>
+                                <span id="1-1-エディタとしての基本機能を改善" class="fragment"></span><a href="#1-1-%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A9%9F%E8%83%BD%E3%82%92%E6%94%B9%E5%96%84"><i class="fa fa-link"></i></a>1-1.
+                                エディタとしての基本機能を改善
+                            </h2>
+
+                            <p>ここでは初期設定で不足している（と思う）エディタの設定を見直します。</p>
+
+                            <h3>
+                                <span id="インデントの見える化" class="fragment"></span><a href="#%E3%82%A4%E3%83%B3%E3%83%87%E3%83%B3%E3%83%88%E3%81%AE%E8%A6%8B%E3%81%88%E3%82%8B%E5%8C%96"><i class="fa fa-link"></i></a>インデントの見える化</h3>
+
+                            <p>コードの可読性を上げるためにはインデントが重要です。たくさんタグを使っているとインデントが迷子になりますよね。</p>
+
+                            <p><strong>ファイル→基本設定→ユーザー設定</strong>　を選択すると「settings.json」ファイルが開くため、下記のとおり設定。</p>
+
+                            <div class="code-frame" data-lang="json">
+                                <div class="code-lang"><span class="bold">settings.json</span></div>
+                                <div class="highlight"><pre>
+<span class="err">//</span> <span class="err">Place</span> <span class="err">your</span> <span class="err">settings</span> <span class="err">in</span> <span class="err">this</span> <span class="err">file</span> <span class="err">to</span> <span class="err">overwrite</span> <span class="err">the</span> <span class="err">default</span> <span class="err">settings</span>
+<span class="p">{</span>
+    <span class="err">//</span> <span class="err">エディターでインデントのガイドを表示する必要があるかどうかを制御します</span>
+    <span class="nt">"editor.renderIndentGuides"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+                            </div>
+
+                            <p>設定すると、このようにインデントに縦線のガイドがひかれます。<br>
+                                <a href="https://qiita-image-store.s3.amazonaws.com/0/34410/11f241f1-f8fc-53ae-9af0-1ff5612d5f90.png" target="_blank" rel="nofollow noopener"><img src="https://qiita-image-store.s3.amazonaws.com/0/34410/11f241f1-f8fc-53ae-9af0-1ff5612d5f90.png" alt="image"></a>
+                            </p>
+
+                            <h3>
+                                <span id="エクスプローラーにアイコンを表示" class="fragment"></span><a href="#%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AB%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%82%92%E8%A1%A8%E7%A4%BA"><i class="fa fa-link"></i></a>エクスプローラーにアイコンを表示</h3>
+
+                            <p>Visual Studio Code標準のエクスプローラーはシンプルで、ファイルの種類は拡張子からしか判断できません。<br> 視覚的に判断できるようファイルにアイコンを表示させます。
+                            </p>
+
+                            <p><strong>ファイル→基本設定→File Icon Theme</strong>　を選択すると「アイコンのテーマ」を選択できます。</p>
+
+                            <p>お好きなものを選んでください。MarcketPlaceで公開されているアイコンセットを追加することもできます。Seti(Visual Studio Code)を選択した場合のスクリーンショットは次の通りです。</p>
+
+                            <p>
+                                <a href="https://qiita-image-store.s3.amazonaws.com/0/34410/941bbd31-4c25-fed2-af1f-b37ee1de0084.png" target="_blank" rel="nofollow noopener"><img src="https://qiita-image-store.s3.amazonaws.com/0/34410/941bbd31-4c25-fed2-af1f-b37ee1de0084.png" alt="image"></a>
+                            </p>
+
+                            <h2>
+                                <span id="1-2-コードを書きやすくするプラグインの導入" class="fragment"></span>
+                                <a href="#1-2-%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E6%9B%B8%E3%81%8D%E3%82%84%E3%81%99%E3%81%8F%E3%81%99%E3%82%8B%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E5%B0%8E%E5%85%A5"><i class="fa fa-link"></i></a>1-2.
+                                コードを書きやすくするプラグインの導入</h2>
+
+                            <p>Visual Studio CodeのサイトにHTMLを書く人のためのガイド（<a href="https://code.visualstudio.com/docs/languages/html" rel="nofollow noopener" target="_blank">HTML Programming in VS Code</a>）が用意されています。ガイドのとおりプラグイン等を導入しなくても、基本的な機能にて、インテリセンス（コード補完）、コードフォーマット、スニペットが利用できます。さらに機能アップするために、次のプラグインを導入することをお勧めします。</p>
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left">プラグイン</th>
+                                        <th style="text-align: left">名前とリンク</th>
+                                        <th style="text-align: left">用途</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <a href="https://qiita-image-store.s3.amazonaws.com/0/34410/4e2bf10d-9f49-6581-7659-f0f95d62ba72.png" target="_blank" rel="nofollow noopener"><img src="https://qiita-image-store.s3.amazonaws.com/0/34410/4e2bf10d-9f49-6581-7659-f0f95d62ba72.png" alt="image"></a>
+                                        </td>
+                                        <td style="text-align: left"><a href="https://marketplace.visualstudio.com/items?itemName=abusaidm.html-snippets" rel="nofollow noopener" target="_blank">HTML Snippets</a></td>
+                                        <td style="text-align: left">HTML5に対応した追加スニペットです。</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <a href="https://qiita-image-store.s3.amazonaws.com/0/34410/7a327b55-0fd4-8533-b375-6a9b6d239b5d.png" target="_blank" rel="nofollow noopener"><img src="https://qiita-image-store.s3.amazonaws.com/0/34410/7a327b55-0fd4-8533-b375-6a9b6d239b5d.png" alt="image"></a>
+                                        </td>
+                                        <td style="text-align: left"><a href="https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion" rel="nofollow noopener" target="_blank">HTML CSS Class Completion</a></td>
+                                        <td style="text-align: left">CSSクラスの入力補完プラグインです。ワークスペース内のCSSを探索し、CSSクラスの入力を支援します。</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <a href="https://qiita-image-store.s3.amazonaws.com/0/34410/c4cbfbe8-be28-2626-2397-ce1d1a27065d.png" target="_blank" rel="nofollow noopener"><img src="https://qiita-image-store.s3.amazonaws.com/0/34410/c4cbfbe8-be28-2626-2397-ce1d1a27065d.png" alt="image"></a>
+                                        </td>
+                                        <td style="text-align: left"><a href="https://marketplace.visualstudio.com/items?itemName=mkaufman.HTMLHint" rel="nofollow noopener" target="_blank">HTMLHint</a></td>
+                                        <td style="text-align: left">HTMLの静的解析ツールです。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p>その他にもJavaScriptの入力支援系のプラグインは大量にあります。<a href="https://marketplace.visualstudio.com/" rel="nofollow noopener" target="_blank">マーケットプレイス</a>で探してみてください。</p>
+
+                            <h2>
+                                <span id="1-3-作成したhtmlのプレビュータスクの作成" class="fragment"></span>
+                                <a href="#1-3-%E4%BD%9C%E6%88%90%E3%81%97%E3%81%9Fhtml%E3%81%AE%E3%83%97%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%AF%E3%81%AE%E4%BD%9C%E6%88%90"><i class="fa fa-link"></i></a>1-3. 作成したHTMLのプレビュータスクの作成</h2>
+
+                            <p>もともとはタスクランナーでスクリプトを書こうと思ったんですが、こちらの機能についてもプラグインが存在し実用に耐えそうだったため、そちらを紹介。</p>
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left">プラグイン</th>
+                                        <th style="text-align: left">名前とリンク</th>
+                                        <th style="text-align: left">用途</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <a href="https://qiita-image-store.s3.amazonaws.com/0/34410/b82b9123-9811-7efd-2658-5d1ecb680273.png" target="_blank" rel="nofollow noopener"><img src="https://qiita-image-store.s3.amazonaws.com/0/34410/b82b9123-9811-7efd-2658-5d1ecb680273.png" alt="image"></a>
+                                        </td>
+                                        <td style="text-align: left"><a href="https://marketplace.visualstudio.com/items?itemName=qinjia.view-in-browser" rel="nofollow noopener" target="_blank">View In Browser</a></td>
+                                        <td style="text-align: left">選択中のHTMLファイルをコマンド一つでブラウザで開くことできます。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p>HTMLファイルを選択し、「Ctrl+F1」を押下するとブラウザが起動できます。いちいちWindowsのエクスプローラーを開く必要がありません。</p>
+
+                            <p>
+                                <a href="https://qiita-image-store.s3.amazonaws.com/0/34410/7b751bf3-36c2-239b-38d5-110a711fff6d.png" target="_blank" rel="nofollow noopener"><img src="https://qiita-image-store.s3.amazonaws.com/0/34410/7b751bf3-36c2-239b-38d5-110a711fff6d.png" alt="image"></a>
+                            </p>
+
+                            <h1>
+                                <span id="2-おわりに" class="fragment"></span><a href="#2-%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB"><i class="fa fa-link"></i></a>2. おわりに</h1>
+
+                            <p>「はじめに」に書いた通り、Visual Studio Codeは軽くてプラグインが豊富なところが良いところですね。見た目もがしがしカスタマイズできるので自分のお気に入りエディタを作れそうです。</p>
+
+                            <p>なお、記事中のサンプルには、<a href="http://getbootstrap.com/" rel="nofollow noopener" target="_blank">Bootstrap</a>のHTMLを利用しました。</p>
+                            <div class="hidden">
+                                <form class="js-task-list-update" action="/84zume/items/476a29264fdc98d98201" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="qfyGIT7SPnw4B33ir7xxjhFfLw+5tFgwhTG49qQh4vqD3fUnZyL1x1NsVlXv0fAlBU1tNYiX9k9g1mZsyHds3w=="
+                                    /><input type="hidden" name="updated_at_confirmation_in_unixtime" id="updated_at_confirmation_in_unixtime" value="1473729832" class="js-task-list-updated-at" /><textarea name="raw_body" id="raw_body" class="js-task-list-field">
+# 0. はじめに
+Microsoft社がオープンソースで開発している高機能エディタVisual Studio Code。
+Visual Studioよりも軽く、他のエディタと比較してもプラグインが豊富、かつ、導入が便利であるため重宝しています。そしてSublime Textなどと同じで複数のプラットフォームで稼働させることができます。
+
+この記事では、HTML（JavaScript、CSSを含む）を編集するにあたり必要となる機能をセットアップする方法をまとめてようと思います。対象のVisual Studio Codeのバージョンは **1.5** です。
+
+# 1. セットアップ
+用意する機能は大きく分けて次の3種類。
+1. エディタとしての基本機能を改善
+2. コードを書きやすくするプラグインの導入
+3. 作成したHTMLのプレビュータスクの作成
+
+## 1-1. エディタとしての基本機能を改善
+ここでは初期設定で不足している（と思う）エディタの設定を見直します。
+
+### インデントの見える化
+コードの可読性を上げるためにはインデントが重要です。たくさんタグを使っているとインデントが迷子になりますよね。
+
+**ファイル→基本設定→ユーザー設定**　を選択すると「settings.json」ファイルが開くため、下記のとおり設定。
+
+```json:settings.json
+// Place your settings in this file to overwrite the default settings
+{
+    // エディターでインデントのガイドを表示する必要があるかどうかを制御します
+    &quot;editor.renderIndentGuides&quot;: true
+}
+```
+
+設定すると、このようにインデントに縦線のガイドがひかれます。
+![image](https://qiita-image-store.s3.amazonaws.com/0/34410/11f241f1-f8fc-53ae-9af0-1ff5612d5f90.png)
+
+### エクスプローラーにアイコンを表示
+Visual Studio Code標準のエクスプローラーはシンプルで、ファイルの種類は拡張子からしか判断できません。
+視覚的に判断できるようファイルにアイコンを表示させます。
+
+**ファイル→基本設定→File Icon Theme**　を選択すると「アイコンのテーマ」を選択できます。
+
+お好きなものを選んでください。MarcketPlaceで公開されているアイコンセットを追加することもできます。Seti(Visual Studio Code)を選択した場合のスクリーンショットは次の通りです。
+
+![image](https://qiita-image-store.s3.amazonaws.com/0/34410/941bbd31-4c25-fed2-af1f-b37ee1de0084.png)
+
+## 1-2. コードを書きやすくするプラグインの導入
+Visual Studio CodeのサイトにHTMLを書く人のためのガイド（[HTML Programming in VS Code](https://code.visualstudio.com/docs/languages/html)）が用意されています。ガイドのとおりプラグイン等を導入しなくても、基本的な機能にて、インテリセンス（コード補完）、コードフォーマット、スニペットが利用できます。さらに機能アップするために、次のプラグインを導入することをお勧めします。
+
+|プラグイン|名前とリンク|用途|
+|:-------|:--------|:-------|
+|![image](https://qiita-image-store.s3.amazonaws.com/0/34410/4e2bf10d-9f49-6581-7659-f0f95d62ba72.png)|[HTML Snippets](https://marketplace.visualstudio.com/items?itemName=abusaidm.html-snippets)|HTML5に対応した追加スニペットです。|
+|![image](https://qiita-image-store.s3.amazonaws.com/0/34410/7a327b55-0fd4-8533-b375-6a9b6d239b5d.png)|[HTML CSS Class Completion](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion)|CSSクラスの入力補完プラグインです。ワークスペース内のCSSを探索し、CSSクラスの入力を支援します。|
+|![image](https://qiita-image-store.s3.amazonaws.com/0/34410/c4cbfbe8-be28-2626-2397-ce1d1a27065d.png)|[HTMLHint](https://marketplace.visualstudio.com/items?itemName=mkaufman.HTMLHint)|HTMLの静的解析ツールです。|
+
+その他にもJavaScriptの入力支援系のプラグインは大量にあります。[マーケットプレイス](https://marketplace.visualstudio.com/)で探してみてください。
+
+## 1-3. 作成したHTMLのプレビュータスクの作成
+もともとはタスクランナーでスクリプトを書こうと思ったんですが、こちらの機能についてもプラグインが存在し実用に耐えそうだったため、そちらを紹介。
+
+|プラグイン|名前とリンク|用途|
+|:-------|:--------|:-------|
+|![image](https://qiita-image-store.s3.amazonaws.com/0/34410/b82b9123-9811-7efd-2658-5d1ecb680273.png)|[View In Browser](https://marketplace.visualstudio.com/items?itemName=qinjia.view-in-browser)|選択中のHTMLファイルをコマンド一つでブラウザで開くことできます。|
+
+HTMLファイルを選択し、「Ctrl+F1」を押下するとブラウザが起動できます。いちいちWindowsのエクスプローラーを開く必要がありません。
+
+![image](https://qiita-image-store.s3.amazonaws.com/0/34410/7b751bf3-36c2-239b-38d5-110a711fff6d.png)
+
+# 2. おわりに
+「はじめに」に書いた通り、Visual Studio Codeは軽くてプラグインが豊富なところが良いところですね。見た目もがしがしカスタマイズできるので自分のお気に入りエディタを作れそうです。
+
+なお、記事中のサンプルには、[Bootstrap](http://getbootstrap.com/)のHTMLを利用しました。
+
+</textarea><input type="submit" name="commit" value="Save changes" data-disable-with="Save changes" /></form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="socialButtons">
+                            <div class="socialButtons_twitter"><a class="twitter-share-button" data-text="Visual Studio CodeでHTML作成環境を整える by @84zume on @Qiita" data-url="http://qiita.com/84zume/items/476a29264fdc98d98201" href="https://twitter.com/share">Tweet</a></div>
+                            <div class="socialButtons_hatebu">
+                                <a class="hatena-bookmark-button" data-hatena-bookmark-layout="simple-balloon" data-hatena-bookmark-title="Visual Studio CodeでHTML作成環境を整える" href="http://b.hatena.ne.jp/entry/http://qiita.com/84zume/items/476a29264fdc98d98201" title="Add to Hatena Bookmark"><img alt="Add to Hatena Bookmark" height="20" src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" style="border: none;" width="20" /></a>
+                                <script async="async" charset="utf-8" src="https://b.st-hatena.com/js/bookmark_button.js" type="text/javascript"></script>
+                            </div>
+                            <div class="socialButtons_googlePlus">
+                                <div class="g-plusone" data-href="http://qiita.com/84zume/items/476a29264fdc98d98201" data-size="medium"></div>
+                            </div>
+                            <div class="socialButtons_facebook">
+                                <div class="fb-like" data-action="like" data-href="http://qiita.com/84zume/items/476a29264fdc98d98201" data-layout="button_count" data-share="false" data-show-faces="false"></div>
+                            </div>
+                            <div class="socialButtons_pocket">
+                                <a class="pocket-btn" data-lang="en" data-pocket-count="horizontal" data-pocket-label="pocket"></a>
+                            </div>
+                        </div>
+                        <section class="itemsShowAuthorInfo" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                            <a href="/84zume"><img alt="" class="itemsShowAuthorInfo_userIcon" itemprop="image" src="https://qiita-image-store.s3.amazonaws.com/0/34410/profile-images/1473686365" /></a>
+                            <div class="itemsShowAuthorInfo_profileStats"><strong class="itemsShowAuthorInfo_userName" itemprop="name"><a itemprop="url" href="/84zume">84zume</a></strong>
+                                <div class="itemsShowAuthorInfo_contribution"><span class="itemsShowAuthorInfo_count">94</span><span class="itemsShowAuthorInfo_unit">Contribution</span></div>
+                                <div data-react-class="T.UserFollowButton" data-react-props="{&quot;url_name&quot;:&quot;84zume&quot;,&quot;initial_followed_by&quot;:false,&quot;size&quot;:&quot;btn-xs&quot;,&quot;position&quot;:&quot;author-info&quot;}"></div>
+                            </div>
+                            <section class="itemsShowAuthorPopularItems">
+                                <h5 class="itemsShowAuthorPopularItems_sectionTitle">人気の投稿</h5>
+                                <ul class="itemsShowAuthorPopularItems_posts list-unstyled">
+                                    <li itemscope="" itemtype="http://schema.org/Article"> <a itemprop="url" track="click" data-label="AuthorPopularItemsAtSidebar" href="/84zume/items/476a29264fdc98d98201">Visual Studio CodeでHTML作成環境を整える</a></li>
+                                    <li itemscope="" itemtype="http://schema.org/Article"> <a itemprop="url" track="click" data-label="AuthorPopularItemsAtSidebar" href="/84zume/items/480acf381bedebe4b7c8">SquirrelでWindowsデスクトップアプリにサイレントインストール機能を具備させる（次世代ClickOnce？）</a></li>
+                                    <li itemscope="" itemtype="http://schema.org/Article">
+                                        <a itemprop="url" track="click" data-label="AuthorPopularItemsAtSidebar" href="/84zume/items/0591b285a0162bc2ba0e">Visual Studio 2015でNUnit3を使ってテストをする</a></li>
+                                    <li itemscope="" itemtype="http://schema.org/Article"> <a itemprop="url" track="click" data-label="AuthorPopularItemsAtSidebar" href="/84zume/items/7f11855780738ba33ca3">Googleカレンダーライクなスケジューラーを作成する手段をまとめる</a></li>
+                                    <li itemscope="" itemtype="http://schema.org/Article"> <a itemprop="url" track="click" data-label="AuthorPopularItemsAtSidebar" href="/84zume/items/dce5c9b496665183f1a9">ASP.NETのセッション管理方法を整理する</a></li>
+                                </ul>
+                            </section>
+                        </section>
+                        <div class="scroll-chaser">
+                            <div class="google-adsense">
+                                <style>
+                                    .test-text-responsible {
+                                        width: 200px;
+                                        height: 200px;
+                                    }
+                                    
+                                    @media(min-width: 1200px) {
+                                        .test-text-responsible {
+                                            width: 250px;
+                                            height: 250px;
+                                        }
+                                    }
+                                    
+                                    @media(max-width: 979px) and (min-width: 768px) {
+                                        .test-text-responsible {
+                                            width: 120px;
+                                            height: 240px;
+                                        }
+                                    }
+                                    
+                                    @media(max-width: 767px) {
+                                        .test-text-responsible {
+                                            width: 320px;
+                                            height: 50px;
+                                        }
+                                    }
+                                </style>
+                                <script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle test-text-responsible" data-ad-client="ca-pub-8127218772604357" data-ad-slot="3880091879" style="display:inline-block"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                        </div>
+                        <div data-react-class="T.Toc" data-react-props="{&quot;body&quot;:&quot;\u003cul\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#0-はじめに\&quot;\u003e0. はじめに\u003c/a\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#1-セットアップ\&quot;\u003e1. セットアップ\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#1-1-エディタとしての基本機能を改善\&quot;\u003e1-1. エディタとしての基本機能を改善\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#インデントの見える化\&quot;\u003eインデントの見える化\u003c/a\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#エクスプローラーにアイコンを表示\&quot;\u003eエクスプローラーにアイコンを表示\u003c/a\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#1-2-コードを書きやすくするプラグインの導入\&quot;\u003e1-2. コードを書きやすくするプラグインの導入\u003c/a\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#1-3-作成したhtmlのプレビュータスクの作成\&quot;\u003e1-3. 作成したHTMLのプレビュータスクの作成\u003c/a\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003ca href=\&quot;#2-おわりに\&quot;\u003e2. おわりに\u003c/a\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n&quot;,&quot;wrapper&quot;:&quot;#article-body-wrapper&quot;}"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="ArticleFooter__menu">
+                            <div class="s-flex-align-center">
+                                <div class="js-likebutton" data-props="{&quot;like_status&quot;:false,&quot;like_count&quot;:25,&quot;show_count&quot;:true,&quot;uuid&quot;:&quot;476a29264fdc98d98201&quot;,&quot;likable_type&quot;:&quot;Article&quot;}"></div>
+                                <div class="ArticleFooter__userList">
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="kent_ocean">
+                                            <a itemprop="url" href="/kent_ocean"><img alt="kent_ocean" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/124995/profile-images/1473716080" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="gupuru">
+                                            <a itemprop="url" href="/gupuru"><img alt="gupuru" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/53996/profile-images/1478734677" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="myblue">
+                                            <a itemprop="url" href="/myblue"><img alt="myblue" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/95644/profile-images/1473706636" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="andna0410">
+                                            <a itemprop="url" href="/andna0410"><img alt="andna0410" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/140251/profile-images/1473721108" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="katopoi">
+                                            <a itemprop="url" href="/katopoi"><img alt="katopoi" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/87369/profile-images/1473704064" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="teremasune">
+                                            <a itemprop="url" href="/teremasune"><img alt="teremasune" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/118819/profile-images/1473714053" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="nmrmsys">
+                                            <a itemprop="url" href="/nmrmsys"><img alt="nmrmsys" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/76595/profile-images/1473700544" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="hyakuson">
+                                            <a itemprop="url" href="/hyakuson"><img alt="hyakuson" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/30304/profile-images/1473685474" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="hideji2">
+                                            <a itemprop="url" href="/hideji2"><img alt="hideji2" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/17814/profile-images/1473682265" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user">
+                                        <div class="js-hovercard" data-hovercard-target-name="sako-j">
+                                            <a itemprop="url" href="/sako-j"><img alt="sako-j" class="thumb thumb--xs" src="https://qiita-image-store.s3.amazonaws.com/0/45792/profile-images/1473690415" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="ArticleFooter__user"><a href="/84zume/items/476a29264fdc98d98201/likers"><span class="fa fa-ellipsis-h"></span></a></div>
+                                </div>
+                            </div>
+                            <div class="u-flex u-align-center">
+                                <div class="ArticleFooter__stock">
+                                    <div class="js-stockButton StockButton" data-counter="" data-path="/84zume/items/476a29264fdc98d98201" data-position="top" data-uuid="476a29264fdc98d98201">
+                                        <form class="button_to" method="post" action="/84zume/items/476a29264fdc98d98201/stock"><button class="StockButton__stock" type="submit"><div class="fa-stack fa-lg"><span class="fa fa-folder-open fa-stack-1x unstock"></span></div><span class="StockButton__label">Stock</span></button><input type="hidden"
+                                                name="authenticity_token" value="blK9AxyfJe+77Yy1FKGQQXpJIf99OjkjH+SWVMbcwYlEc84FRW/uVNCGpwJUzBHqbltjxUwZl1z6A0jOqopPrA==" /></form>
+                                        <form class="button_to" method="post" action="/84zume/items/476a29264fdc98d98201/unstock"><button class="StockButton__unstock" data-toggle="tooltip" title="Stocked" type="submit"><div class="fa-stack fa-lg"><span class="fa fa-folder fa-stack-1x"></span><span class="fa fa-check fa-stack-1x fa-inverse"></span></div><span class="StockButton__label">Stock</span></button><input
+                                                type="hidden" name="authenticity_token" value="q4hy6usqCQdRx+CuQR1m/BoKRZ1PBeNMuVmPqB6WT6GBqQHsstrCvDqsyxkBcOdXDhgHp34mTTNcvlEycsDBhA==" /></form>
+                                    </div>
+                                </div>
+                                <div class="ArticleFooter__editRequest"><a class="u-link-no-underline" data-toggle="tooltip" title="You can propose improvements about the article to the author 💪" href="/drafts/476a29264fdc98d98201/edit"><span class="fa fa-send-o fa-lg"></span> <span>Edit request</span></a></div>
+                                <div class="dropdown ArticleFooter__dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-ellipsis-h"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a data-target=".js-report-form" data-toggle="modal" href="#"><i class="fa fa-fw fa-flag"></i> Report article</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemsShowBody_articleColumnFooter">
+                            <div class="socialButtons">
+                                <div class="socialButtons_twitter"><a class="twitter-share-button" data-text="Visual Studio CodeでHTML作成環境を整える by @84zume on @Qiita" data-url="http://qiita.com/84zume/items/476a29264fdc98d98201" href="https://twitter.com/share">Tweet</a></div>
+                                <div class="socialButtons_hatebu">
+                                    <a class="hatena-bookmark-button" data-hatena-bookmark-layout="simple-balloon" data-hatena-bookmark-title="Visual Studio CodeでHTML作成環境を整える" href="http://b.hatena.ne.jp/entry/http://qiita.com/84zume/items/476a29264fdc98d98201" title="Add to Hatena Bookmark"><img alt="Add to Hatena Bookmark" height="20" src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" style="border: none;" width="20" /></a>
+                                    <script async="async" charset="utf-8" src="https://b.st-hatena.com/js/bookmark_button.js" type="text/javascript"></script>
+                                </div>
+                                <div class="socialButtons_googlePlus">
+                                    <div class="g-plusone" data-href="http://qiita.com/84zume/items/476a29264fdc98d98201" data-size="medium"></div>
+                                </div>
+                                <div class="socialButtons_facebook">
+                                    <div class="fb-like" data-action="like" data-href="http://qiita.com/84zume/items/476a29264fdc98d98201" data-layout="button_count" data-share="false" data-show-faces="false"></div>
+                                </div>
+                                <div class="socialButtons_pocket">
+                                    <a class="pocket-btn" data-lang="en" data-pocket-count="horizontal" data-pocket-label="pocket"></a>
+                                </div>
+                            </div>
+                            <div class="text-advertisement"><span class="label label-info">PR</span> <a target="_blank" id="ad-49" href="https://teams.qiita.com/?utm_content=49&amp;utm_medium=text&amp;utm_source=qiita">Stop sharing your company knowledge via emails - Qiita:Team</a></div>
+                            <script>
+                                window.addEventListener("DOMContentLoaded", function() {
+                                    'use strict';
+                                    QiitaAnalysis.showAdvertisement({
+                                        adId: 49
+                                    })
+                                    $('#ad-49').click(function() {
+                                        QiitaAnalysis.clickAdvertisement({
+                                            type: 'text',
+                                            place: 'bottom',
+                                            adId: 49
+                                        })
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div class="itemsShowComment_wrapper" id="comments">
+                            <div data-react-class="T.CommentListContainer" data-react-props="{&quot;currentUser&quot;:null,&quot;initialComments&quot;:[],&quot;monthly_public_image_uploadable_size_limit&quot;:null,&quot;total_uploaded_public_image_size_in_current_month&quot;:null,&quot;item&quot;:{&quot;id&quot;:422536,&quot;uuid&quot;:&quot;476a29264fdc98d98201&quot;,&quot;suspended&quot;:false,&quot;secret&quot;:false},&quot;owner&quot;:{&quot;url_name&quot;:&quot;84zume&quot;},&quot;is_team&quot;:false,&quot;is_project&quot;:false,&quot;logged_in&quot;:false,&quot;polling&quot;:false,&quot;mention_canditates&quot;:[{&quot;id&quot;:34410,&quot;url_name&quot;:&quot;84zume&quot;,&quot;profile_image_url&quot;:&quot;https://qiita-image-store.s3.amazonaws.com/0/34410/profile-images/1473686365&quot;}]}">Comments Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <div class="js-report-form modal fade reportForm">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"><button name="button" type="submit" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Report article</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/reports" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="b0eQGE+8hUz6ZpEInd0pkt7Rq6giRu7/chzg0XALbF1FZuMeFkxO95ENur/dsKg5ysPpkhNlQICX+z5LHF3ieA==" /><input type="hidden" name="redirect_path"
+                                id="redirect_path" value="/84zume/items/476a29264fdc98d98201" /><input type="hidden" name="item_uuid" id="item_uuid" value="476a29264fdc98d98201" />
+                            <p>Help us understand the problem. What is going on with this item?</p><br />
+                            <div class="form-group">
+                                <ul class="list-unstyled">
+                                    <li><label><input type="radio" name="report_type" id="report_type_spam" value="spam" required="required" /> It&#39;s spam </label></li>
+                                    <li><label><input type="radio" name="report_type" id="report_type_harassment" value="harassment" required="required" /> It&#39;s abusive or harmful </label></li>
+                                    <li><label><input type="radio" name="report_type" id="report_type_inappropriate_content" value="inappropriate_content" required="required" /> It contains inappropriate content </label></li>
+                                </ul>
+                            </div>
+                            <div class="reportForm_submitButtonContainer"><button name="button" type="submit" class="btn btn-primary reportForm_submitButton"><i class="fa fa-send"></i> Submit</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script id="js-item" type="application/json">
+            {
+                "url": "http://qiita.com/84zume/items/476a29264fdc98d98201",
+                "id": 422536,
+                "uuid": "476a29264fdc98d98201"
+            }
+        </script>
+        <script class="js-user" type="application/json">
+            { & quot;
+                id & quot;: 34410, & quot;
+                url_name & quot;: & quot;
+                84 zume & quot;, & quot;
+                profile_image_url & quot;: & quot;
+                https: //qiita-image-store.s3.amazonaws.com/0/34410/profile-images/1473686365&quot;}
+        </script>
+        <script language="JavaScript" src="//cdn.bigmining.com/private/js/qiita_bigmining.js" type="text/javascript"></script>
+    </div>
+    <footer class="footer">
+        <div class="footer_inner">
+            <div class="footer_container">
+                <ul class="footer_links-left">
+                    <li class="footer_link"><a class="footer_copyright" href="http://increments.co.jp">© 2016 Increments Inc.</a></li>
+                    <li class="footer_link"><a href="http://qiita.com/terms">Terms</a></li>
+                    <li class="footer_link"><a href="http://qiita.com/privacy">Privacy</a></li>
+                    <li class="footer_link"><a href="http://help.qiita.com">Help</a></li>
+                    <li class="footer_link"><a href="https://increments.zendesk.com/anonymous_requests/new">Contact</a></li>
+                </ul>
+                <ul class="footer_links-right">
+                    <li class="footer_link"><a href="http://qiita.com/about">About</a></li>
+                    <li class="footer_link"><a href="http://blog.qiita.com">Blog</a></li>
+                    <li class="footer_link"><a href="http://qiita.com/api/v2/docs">API</a></li>
+                    <li class="footer_link"><a href="https://teams.qiita.com/">Team</a></li>
+                    <li class="footer_link"><a href="http://kobito.qiita.com">Kobito</a></li>
+                    <li class="footer_link"><a class="js-public-form-feedback-link" data-target=".js-feedback-form" data-toggle="modal" href=""><i class="fa fa-heart"></i> Feedback <i class="fa fa-caret-down"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div class="js-feedback-form modal fade feedbackForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><button name="button" type="submit" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Feedback</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="js-feedback-form-form" action="/feedbacks" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="sIC81r5RcH6qGZM6QrlC8rVsxcySS0OD0IWfwNwpUOeaoc/Q56G7xcFyuI0C1MNZoX6H9qNo7fw1YkFasH/ewg==" /><input type="hidden" name="redirect_path"
+                            id="redirect_path" value="/84zume/items/476a29264fdc98d98201" />
+                        <div class="form-group"><textarea name="feedback[message]" id="feedback_message" class="form-control js-feedback-form-text-area" placeholder="Please give us any feedback about Qiita." required="required" rows="5">
+</textarea></div>
+                        <div class="feedbackForm_submitButtonContainer"><button name="button" type="submit" class="btn btn-primary feedbackForm_submitButton"><i class="fa fa-send"></i> Submit</button>
+                            <p class="feedbackForm_note">We don&#39;t reply to any feedback.<br />If you need help with Qiita, please send a support request from <a href="https://increments.zendesk.com/anonymous_requests/new">here</a>.</p>
+                        </div>
+                        <div style="position:fixed;top:-99999px;opacity:0.0001;"><input name="feedback[name]" type="text" /></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // if (window.mixpanel instanceof Element) {
+        //   window.mixpanel = [];
+        // }
+        // (function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+        // for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+    </script>
+    <script src="http://cdn.qiita.com/assets/public-903cc3b919719192cdbed2cf233a0586.min.js"></script>
+    <script>
+        (function() {
+            var script = document.getElementsByTagName('script')[0];
+            var load = function(src, id) {
+                var el = document.createElement('script');
+                el.async = true;
+                el.src = src;
+                el.id = id;
+                script.parentNode.insertBefore(el, script);
+            };
+            // Optimizely
+            load('//cdn.optimizely.com/js/52738645.js', 'optimizely-jssdk');
+            // Google Analytics
+            window._gaq = window._gaq || [];
+            var isCareer = location.hostname.split('.')[0] == 'career';
+            if (isCareer) {
+                window._gaq.push(['_setAccount', 'UA-24675221-11']);
+                window._gaq.push(['_setDomainName', 'qiita.com']);
+            } else {
+                window._gaq.push(['_setAccount', 'UA-24675221-1']);
+            }
+            window._gaq.push(['_setCustomVar', 1, 'logged_in', 'false', 2]);
+            window._gaq.push(['_trackPageview']);
+            var src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            load(src, 'google-analytics-jssdk');
+            // Google Analytics - Universal Analytics
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-24675221-12', {
+
+            });
+            ga('create', 'UA-75364325-1', {
+                name: 'user'
+            });
+            ga('user.send', 'pageview');
+            ga('set', 'dimension1', 'false');
+            ga('set', 'dimension3', 'false');
+            ga('require', 'displayfeatures');
+            ga('set', 'forceSSL', true);
+            ga('send', 'pageview');
+            // Google Tag Manager
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-TBQWPN');
+        })();
+    </script>
+</body>
+
+</html>
